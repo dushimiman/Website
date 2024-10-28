@@ -3,7 +3,7 @@ import React from 'react';
 function Home() {
   return (
     <>
-      <header id="header" className="header sticky-top">
+       <header id="header" className="header sticky-top">
         <div className="topbar d-flex align-items-center dark-background">
           <div className="container d-flex justify-content-center justify-content-md-between">
             <div className="contact-info d-flex align-items-center">
@@ -38,30 +38,11 @@ function Home() {
               <ul>
                 <li><a href="/" className="active">Home</a></li>
                 <li><a href="/Aboutus">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#services">Media</a></li>
+                
                 <li><a href="#team">Team</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li className="dropdown">
-                  <a href="#"><span>Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
-                  <ul>
-                    <li><a href="#">Dropdown 1</a></li>
-                    <li className="dropdown">
-                      <a href="#"><span>Deep Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
-                      <ul>
-                        <li><a href="#">Deep Dropdown 1</a></li>
-                        <li><a href="#">Deep Dropdown 2</a></li>
-                        <li><a href="#">Deep Dropdown 3</a></li>
-                        <li><a href="#">Deep Dropdown 4</a></li>
-                        <li><a href="#">Deep Dropdown 5</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Dropdown 2</a></li>
-                    <li><a href="#">Dropdown 3</a></li>
-                    <li><a href="#">Dropdown 4</a></li>
-                  </ul>
-                </li>
+                
+                
                 <li><a href="#contact">Contact</a></li>
               </ul>
               <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -69,7 +50,6 @@ function Home() {
           </div>
         </div>
       </header>
-
       <main className="main">
         <section id="hero" className="hero section dark-background">
           <img src="assets/img/hero-bg.jpg" alt="Hero Background" data-aos="fade-in" />
