@@ -1,9 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { Modal, Button, Form, Input, notification } from 'antd';
+import axios from 'axios';
+import 'antd/dist/reset.css';
 
 function Home() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const onFinish = async (values) => {
+    console.log('Form values:', values);
+
+    try {
+      const response = await fetch('https://website-backend-dushimiman.onrender.com/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Success:', data);
+        setIsModalVisible(false); 
+
+        // Show success notification
+        notification.success({
+          message: 'Thank You!',
+          description: 'Thank you for your requests. We will contact you in a few minutes. \nUrakoze gusaba kugura product zacu na service, turaguhamagara mu minota micye.',
+          placement: 'topRight',
+          duration: 5, // duration in seconds
+        });
+      } else {
+        console.error('Error submitting form:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
   return (
     <>
-       <header id="header" className="header sticky-top">
+      <header id="header" className="header sticky-top">
         <div className="topbar d-flex align-items-center dark-background">
           <div className="container d-flex justify-content-center justify-content-md-between">
             <div className="contact-info d-flex align-items-center">
@@ -38,12 +84,9 @@ function Home() {
               <ul>
                 <li><a href="/" className="active">Home</a></li>
                 <li><a href="/Aboutus">About</a></li>
-                <li><a href="#services">Media</a></li>
-                
-                <li><a href="#team">Team</a></li>
-                
-                
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/Media">Media</a></li>
+                <li><a href="/OurTeam">Team</a></li>
+                <li><a href="/Contactus">Contact</a></li>
               </ul>
               <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -55,7 +98,7 @@ function Home() {
           <img src="assets/img/hero-bg.jpg" alt="Hero Background" data-aos="fade-in" />
           <div className="container position-relative">
             <div className="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
-              <h2>Welcome to Sator Rwanda Ltd</h2>
+              <h2 style={{ color: 'white', fontWeight: 'bold' }}>Welcome to Sator Rwanda Ltd</h2>
               <p>We provide good quality products and services</p>
             </div>
 
@@ -78,23 +121,21 @@ function Home() {
                     <div className="col-xl-4 d-flex align-items-stretch">
                       <div className="icon-box" data-aos="zoom-out" data-aos-delay="300">
                         <i className="bi bi-clipboard-data"></i>
-                        <h4>Our Mission</h4>
+                        <h4 style={{ color: 'white', fontWeight: 'bold' }}>Our Mission</h4>
                         <p>To consistently supply quality Speed Governors and GPS Trackers, meeting safety standards within and outside Rwanda.</p>
                       </div>
                     </div>
-
                     <div className="col-xl-4 d-flex align-items-stretch">
                       <div className="icon-box" data-aos="zoom-out" data-aos-delay="400">
                         <i className="bi bi-gem"></i>
-                        <h4>Our Vision</h4>
+                        <h4 style={{ color: 'white', fontWeight: 'bold' }}>Our Vision</h4>
                         <p>To be the company of choice for quality brand products and support services in transport.</p>
                       </div>
                     </div>
-
                     <div className="col-xl-4 d-flex align-items-stretch">
                       <div className="icon-box" data-aos="zoom-out" data-aos-delay="500">
                         <i className="bi bi-inboxes"></i>
-                        <h4>Fleet and Fuel Management</h4>
+                        <h4 style={{ color: 'white', fontWeight: 'bold' }}>Fleet and Fuel Management</h4>
                         <p>Utilizing ultrasonic sensor technology for precise fuel level measurement in tanks.</p>
                       </div>
                     </div>
@@ -104,144 +145,164 @@ function Home() {
             </div>
           </div>
         </section>
-        <section id="alt-services" className="alt-services section">
-      <div className="container" data-aos="fade-up" data-aos-delay="100">
-        <div className="row gy-4">
-          
-          <div className="col-lg-6" data-aos="zoom-in" data-aos-delay="200">
-            <div className="service-item position-relative">
-              <div className="img">
-                <img src="assets/img/Speed Govonor.jpg" 
-                     className="img-fluid w-100" 
-                     style={{ height: '300px', objectFit: 'cover' }} 
-                     alt="Speed Governor"/>
-              </div>
-              <div className="details">
-                <a href="service-details.html" className="stretched-link">
-                  <h3>Speed Governor</h3>
-                </a>
-                <p>A speed limiter prevents a car from travelling over a certain speed set by the government. Unlike cruise control, it doesn't maintain a set speed.</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-6" data-aos="zoom-in" data-aos-delay="300">
-            <div className="service-item position-relative">
-              <div className="img">
-                <img src="assets/img/tracker.jpg" 
-                     className="img-fluid w-100" 
-                     style={{ height: '300px', objectFit: 'cover' }} 
-                     alt="GPS Tracker"/>
-              </div>
-              <div className="details">
-                <a href="service-details.html" className="stretched-link">
-                  <h3>GPS Tracker</h3>
-                </a>
-                <p>It is used for the surveillance of location through the Global Positioning System (GPS) to track the location of an entity or object remotely.</p>
+        <section className="container-fluid blog py-5">
+  <div className="container py-5">
+    <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style={{ maxWidth: '800px' }}>
+      <h1 className="display-5 text-capitalize mb-3">Our Products <span className="text-primary">and Services</span></h1>
+      <p className="mb-0">Innovative vehicle Solutions Enhancing Safety, Efficiency, and Performance</p>
+    </div>
+    <div className="row g-4">
+      {[{id: 1, title: "Speed Governors", description: "Ensure Compliance and Road Safety with our RURA certified Speed Governors."},
+        {id: 2, title: "GPS Trackers", description: "Real-time Vehicle Tracking Solutions for Enhanced security and Management."},
+        {id: 3, title: "Fuel Management System", description: "Optimaze Fuel Consuption and Streameline fleet operations with our advanced systems."}
+      ].map((product, i) => (
+        <div className="col-lg-4 wow fadeInUp" data-wow-delay={`${i * 0.2}s`} key={product.id}>
+          <div className="blog-item">
+            <div className="blog-img position-relative" style={{ position: 'relative', overflow: 'hidden', height: '250px', width: '100%' }}>
+              <img src={`img/blog-${product.id}.jpg`} 
+                   className="img-fluid rounded-top w-100" 
+                   alt={product.title} 
+                   style={{ height: '100%', objectFit: 'cover' }} 
+              />
+              {/* Inline overlay content */}
+              <div style={{
+                position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+                backgroundColor: 'rgba(0, 0, 0, 0.6)', color: 'white', display: 'flex',
+                flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+                textAlign: 'center', padding: '20px', opacity: 0, transition: 'opacity 0.3s ease-in-out'
+              }}
+              className="overlay-content"
+              onMouseEnter={(e) => e.currentTarget.style.opacity = 1}
+              onMouseLeave={(e) => e.currentTarget.style.opacity = 0}>
+                <h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>{product.title}</h1>
+                <p style={{ fontSize: '16px' }}>{product.description}</p>
               </div>
             </div>
-          </div>
-
-          <div className="col-lg-6" data-aos="zoom-in" data-aos-delay="400">
-            <div className="service-item position-relative">
-              <div className="img">
-                <img src="assets/img/fuel.jpg" 
-                     className="img-fluid w-100" 
-                     style={{ height: '300px', objectFit: 'cover' }} 
-                     alt="Fleet and Fuel Management System"/>
-              </div>
-              <div className="details">
-                <a href="service-details.html" className="stretched-link">
-                  <h3>Fleet and Fuel Management System</h3>
-                </a>
-                <p>Fuel-management system is used to maintain, control, and monitor fuel consumption and stock in any type of industry that uses transport.</p>
-              </div>
+            <div className="blog-content rounded-bottom p-4">
+              <div className="blog-date" onClick={showModal}>Click to Request</div>
+              <a href="#" className="h4 d-block mb-3">{product.title}</a>
+              <p className="mb-3">{product.description}</p>
             </div>
           </div>
-
-          <div className="col-lg-6" data-aos="zoom-in" data-aos-delay="500">
-            <div className="service-item position-relative">
-              <div className="img">
-                <img src="assets/img/xr.jpg" 
-                     className="img-fluid w-100" 
-                     style={{ height: '300px', objectFit: 'cover' }} 
-                     alt="Asperiores Commodit"/>
-              </div>
-              <div className="details">
-                <a href="service-details.html" className="stretched-link">
-                  <h3>Asperiores Commodit</h3>
-                </a>
-                <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-              </div>
-            </div>
-          </div>
-
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
+  </div>
+</section>
 
+
+        <Modal
+          title="Fill Your Information"
+          visible={isModalVisible}
+          onCancel={handleCancel}
+          footer={null} // Removing default footer buttons
+        >
+          <Form
+            layout="vertical"
+            onFinish={onFinish}
+          >
+            <Form.Item
+              name="name"
+              label="Name"
+              rules={[{ required: true, message: 'Please enter your name' }]}
+            >
+              <Input placeholder="Your Name" />
+            </Form.Item>
+
+            <Form.Item
+              name="email"
+              label="Email"
+              rules={[{ required: true, message: 'Please enter your email', type: 'email' }]}
+            >
+              <Input placeholder="Your Email" />
+            </Form.Item>
+
+            <Form.Item
+              name="phone"
+              label="Phone Number"
+              rules={[{ required: true, message: 'Please enter your phone number' }]}
+            >
+              <Input placeholder="Your Phone Number" />
+            </Form.Item>
+
+            <Form.Item
+              name="comment"
+              label="Comment or Suggestion"
+            >
+              <Input.TextArea placeholder="Any comments or suggestions" />
+            </Form.Item>
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit" block>
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
         <footer id="footer" className="footer light-background">
-          <div className="container footer-top">
-            <div className="row gy-4">
-              <div className="col-lg-4 col-md-6 footer-about">
-              <a href="index.html" className="logo d-flex align-items-center">
-              <img src="assets/img/logo.png" alt="Logo" />
-            </a>
-                <div className="footer-contact pt-3">
-                  <p>
-Nyabugogo,Manu Plaza,4th Floor
-Room 20</p>
-                  <p><strong>Phone:</strong> (+250) 781 13 81 55
-                  </p>
-                  <p><strong>Email:</strong> info@satorrwanda.rw</p>
+        <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <div class="footer-item">
+                                <h4 class="text-white mb-4">About Us</h4>
+                                <p class="mb-3">We are a leading company in Rwanda to deliver speed governors with an experience of more than 5 years. Our speed governors and GPS trackers have strong stability and are easy to install. </p>
+                            </div>
+                            <div class="position-relative">
+                                <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Enter your email"/>
+                                <button type="button" class="btn btn-secondary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="text-white mb-4">Quick Links</h4>
+                            <a href="/"><i class="fas fa-angle-right me-2"></i> Home</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Team</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Media</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Contact us</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="text-white mb-4">Business Hours</h4>
+                            <div class="mb-3">
+                                <h6 class="text-muted mb-0">Mon - Friday:</h6>
+                                <p class="text-white mb-0">07.30 am to 05.00 pm</p>
+                            </div>
+                            <div class="mb-3">
+                                <h6 class="text-muted mb-0">Saturday:</h6>
+                                <p class="text-white mb-0">07.30 am to 01.00 pm</p>
+                            </div>
+                            <div class="mb-3">
+                                <h6 class="text-muted mb-0">Sunday:</h6>
+                                <p class="text-white mb-0">09.00 am to 01.00 pm</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="text-white mb-4">Contact Info</h4>
+                            <a href="#"><i class="fa fa-map-marker-alt me-2"></i> Nyabugogo, Manu Plaza</a>
+                            <a href="mailto:info@example.com"><i class="fas fa-envelope me-2"></i>info@satorrwanda.rw
+                            </a>
+                            <a href="tel:+012 345 67890"><i class="fas fa-phone me-2"></i> (+250) 781 13 81 55</a>
+                            <a href="tel:+012 345 67890" class="mb-3"><i class="fas fa-print me-2"></i> (+250) 728 62 62 68
+                            </a>
+                            <div class="d-flex">
+                                <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-facebook-f text-white"></i></a>
+                                <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-twitter text-white"></i></a>
+                                <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-instagram text-white"></i></a>
+                                <a class="btn btn-secondary btn-md-square rounded-circle me-0" href=""><i class="fab fa-linkedin-in text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="social-links d-flex mt-4">
-                  <a href="#"><i className="bi bi-twitter"></i></a>
-                  <a href="#"><i className="bi bi-facebook"></i></a>
-                  <a href="#"><i className="bi bi-instagram"></i></a>
-                  <a href="#"><i className="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-
-              <div className="col-lg-2 col-md-3 footer-links">
-                <h4>Useful Links</h4>
-                <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Tracking system
-                  </a></li>
-                  <li><a href="#">Fuel Management</a></li>
-                </ul>
-              </div>
-
-              <div className="col-lg-2 col-md-3 footer-links">
-                <h4>Our Services</h4>
-                <ul>
-                  <li><a href="#">Speed Governors</a></li>
-                  <li><a href="#">GPS Trackers</a></li>
-                  <li><a href="#">Fleet and Fuel management</a></li>
-                  <li><a href="#">Garage</a></li>
-                 
-                </ul>
-              </div>
-
-              <div className="col-lg-4 col-md-12 footer-newsletter">
-                <h4>Our Newsletter</h4>
-                <p>Subscribe to our newsletter to receive updates on our products and services.</p>
-                <form action="forms/newsletter.php" method="post" className="php-email-form">
-                  <input type="email" name="email" placeholder="Enter your email" />
-                  <input type="submit" value="Subscribe" />
-                </form>
-              </div>
             </div>
-          </div>
-          <div className="container text-center">
-            <div className="copyright">
-              &copy; 2024 <strong>Sator Rwanda Ltd</strong>. All Rights Reserved.
-            </div>
-            
-          </div>
+        </div>
         </footer>
       </main>
     </>

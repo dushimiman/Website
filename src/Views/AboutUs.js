@@ -63,12 +63,12 @@ function AboutUs() {
               <ul>
                 <li><a href="/" className="active">Home</a></li>
                 <li><a href="/Aboutus">About</a></li>
-                <li><a href="#services">Media</a></li>
+                <li><a href="/Media">Media</a></li>
                 
-                <li><a href="#team">Team</a></li>
+                <li><a href="/OurTeam">Team</a></li>
                 
                 
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/Contactus">Contact</a></li>
               </ul>
               <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -196,44 +196,71 @@ function AboutUs() {
 
       </main>
 
-      <footer id="footer" className="footer">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-4 col-md-6 footer-contact">
-              <h3>SATOR RWANDA</h3>
-              <p>
-                Nyabugogo, Manu Plaza, 4th Floor, Room 20<br />
-                <strong>Phone:</strong> (+250) 781 13 81 55<br />
-                <strong>Email:</strong> info@satorrwanda.rw<br />
-              </p>
+      <footer id="footer" className="footer light-background">
+        <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <div class="footer-item">
+                                <h4 class="text-white mb-4">About Us</h4>
+                                <p class="mb-3">We are a leading company in Rwanda to deliver speed governors with an experience of more than 5 years. Our speed governors and GPS trackers have strong stability and are easy to install. </p>
+                            </div>
+                            <div class="position-relative">
+                                <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Enter your email"/>
+                                <button type="button" class="btn btn-secondary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="text-white mb-4">Quick Links</h4>
+                            <a href="/"><i class="fas fa-angle-right me-2"></i> Home</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Team</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Media</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Contact us</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="text-white mb-4">Business Hours</h4>
+                            <div class="mb-3">
+                                <h6 class="text-muted mb-0">Mon - Friday:</h6>
+                                <p class="text-white mb-0">07.30 am to 05.00 pm</p>
+                            </div>
+                            <div class="mb-3">
+                                <h6 class="text-muted mb-0">Saturday:</h6>
+                                <p class="text-white mb-0">07.30 am to 01.00 pm</p>
+                            </div>
+                            <div class="mb-3">
+                                <h6 class="text-muted mb-0">Sunday:</h6>
+                                <p class="text-white mb-0">09.00 am to 01.00 pm</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="text-white mb-4">Contact Info</h4>
+                            <a href="#"><i class="fa fa-map-marker-alt me-2"></i> Nyabugogo, Manu Plaza</a>
+                            <a href="mailto:info@example.com"><i class="fas fa-envelope me-2"></i>info@satorrwanda.rw
+                            </a>
+                            <a href="tel:+012 345 67890"><i class="fas fa-phone me-2"></i> (+250) 781 13 81 55</a>
+                            <a href="tel:+012 345 67890" class="mb-3"><i class="fas fa-print me-2"></i> (+250) 728 62 62 68
+                            </a>
+                            <div class="d-flex">
+                                <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-facebook-f text-white"></i></a>
+                                <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-twitter text-white"></i></a>
+                                <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-instagram text-white"></i></a>
+                                <a class="btn btn-secondary btn-md-square rounded-circle me-0" href=""><i class="fab fa-linkedin-in text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div className="col-lg-4 col-md-6 footer-links">
-              <h4>Useful Links</h4>
-              <ul>
-                <li><i className="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                <li><i className="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                <li><i className="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                <li><i className="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                <li><i className="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-              </ul>
-            </div>
-
-            <div className="col-lg-4 col-md-6 footer-social">
-              <h4>Follow Us</h4>
-              <div className="social-links d-flex">
-                <a href="#" className="twitter"><i className="bi bi-twitter"></i></a>
-                <a href="#" className="facebook"><i className="bi bi-facebook"></i></a>
-                <a href="#" className="instagram"><i className="bi bi-instagram"></i></a>
-                <a href="#" className="linkedin"><i className="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-          <div className="copyright">
-            &copy; Copyright <strong><span>SATOR RWANDA</span></strong>. All Rights Reserved
-          </div>
         </div>
-      </footer>
+        </footer>
     </>
   );
 }
